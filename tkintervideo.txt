@@ -1,0 +1,29 @@
+Tkinter 
+python standard library
+lightweight, good enough
+
+unweildy import
+considered ugly
+
+themed Tk
+makes old Tkinter look pretty
+
+Tk operates in loop that is transparent to the developer
+widgets are assigned parents
+layout managers handle widget placement
+widgets can have events bound to them
+
+pack manager
+    specify a side
+    parent sizes itself to fit everything
+    not flexible for complex layouts
+grid manager
+    close to other toolkits
+    frames are laid out in a grid
+
+widgets are what you can do
+ttk
+    overrides drawing of tkinter widgets
+notebook
+    two tabs
+ttk Treeview
