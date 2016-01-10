@@ -2,24 +2,49 @@ import tkinter as tk
 import sys
 from time import sleep
 
-# class SpeedReader(tk.Frame):
-#     def __init__(self, master=None):
-#         frame = super().__init__()
+end_of_sentence = [".", "!", "?"]
+
+def calc_delay(wpm):
+    """
+    Converts wpm delay to seconds.
+    """
+    return 1 / (wpm / 60)
+
+def welcome(root, canvas, width, height, font_size):
+    """
+    Gives user a chance to get ready.
+    """
+    for i in [5, 4, 3, 2, 1]:
+        canvas.create_rectangle(0, 0, width, height, fill = 'Beige')
+        if i == 1: 
+            canvas.create_text(width / 2, height / 2, text="Starting in " + str(i) + " second",
+                              font=("Courier", font_size))
+        else:
+            canvas.create_text(width / 2, height / 2, text="Starting in " + str(i) + " seconds",
+                                  font=("Courier", font_size))
+        root.update()
+        sleep(1)
 
 def animate_text(root, canvas, filename, width, height, font_size, wpm):
     fin = open(filename, 'r')
     words = fin.read().split()
+    delay = calc_delay(wpm)
     for word in words:
         canvas.create_rectangle(0, 0, width, height, fill = 'Beige')
         canvas.create_text(width / 2, height / 2, text=word, font=("Courier", font_size))
         root.update()
-        sleep(0.2)
+        if word[-1] == ",":
+            sleep(delay / 2)
+        elif word[-1] in end_of_sentence:
+            sleep(delay)
+        sleep(delay)
     return
 
 def speed_read(filename, width, height, font_size, wpm):
     root = tk.Tk()
     canvas = tk.Canvas(root, width = width, height = height)
     canvas.pack()
+    welcome(root, canvas, width, height, font_size)
     animate_text(root, canvas, filename, width, height, font_size, wpm)
     tk.mainloop()
     return
