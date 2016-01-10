@@ -1,36 +1,20 @@
-from tkinter import *
-from tkinter.ttk import *
+import tkinter as tk
 
-class TkNotebook():
-    def __init__(self, root):
-    
-        self.frame = Frame(root)
-        self.notebook = Notebook(self.frame)
-        
-        f1 = Frame(self.notebook, width=200, height=100)
-        f2 = Frame(self.notebook, width=200, height=100)
-        self.notebook.add(f1, text="Page 1")
-        self.notebook.add(f2, text="Page 2")
-        
-        self.label = Label(self.frame, text="A Notebook on the left")
-        
-        # Layout
-        self.frame.grid(row=0, column=0, sticky=(N, S, E, W))
-        self.notebook.grid(row=0, column=0, sticky=(N, S, E, W))
-        self.label.grid(row=0, column=1, sticky=(E,))
-        
-        # Resize rules
-        root.columnconfigure(0, weight=1)
-        root.rowconfigure(0, weight=1)
-        self.frame.columnconfigure(0, weight=2)
-        self.frame.rowconfigure(0, weight=2)
-        
-    def quit(self):
-        self.frame.quit()
+class Application(tk.Frame):
+    def __init__(self, master=None):
+        frame = tk.Frame(master, width = 400, height = 400)
+        frame.pack()
+        self.button = tk.Button(
+            frame, text="QUIT", fg="red", command=frame.quit
+            )
+        self.button.pack(side=tk.LEFT)
 
-if __name__ == '__main__':
-    root = Tk()
-    
-    app = TkNotebook(root)
-    
-    root.mainloop()
+        self.hi_there = tk.Button(frame, text="Hello", command=self.say_hi)
+        self.hi_there.pack(side=tk.LEFT)
+    def say_hi(self):
+        print("hi there, everyone!")
+
+root = tk.Tk()
+root.geometry("500x500")
+app = Application(master = root)
+root.mainloop()
