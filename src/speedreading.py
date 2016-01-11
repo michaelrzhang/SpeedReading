@@ -2,6 +2,8 @@ import tkinter as tk
 import sys
 from time import sleep
 
+# http://effbot.org/tkinterbook/tkinter-hello-tkinter.htm
+
 end_of_sentence = [".", "!", "?"]
 
 def calc_delay(wpm):
